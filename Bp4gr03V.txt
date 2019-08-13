@@ -3,10 +3,10 @@ const client = new Discord.Client();
 
 var config = {
   events: [
-    {type: "CHANNEL_CREATE", logType: "CHANNEL_CREATE", limit: 4 , delay: 5000},
+    {type: "CHANNEL_CREATE", logType: "CHANNEL_CREATE", limit: 20, delay: 5000},
     {type: "CHANNEL_DELETE", logType: "CHANNEL_DELETE", limit: 4, delay: 5000},
-    {type: "GUILD_MEMBER_REMOVE", logType: "MEMBER_KICK", limit: 4, delay: 5000},
-    {type: "GUILD_BAN_ADD", logType: "MEMBER_BAN_ADD", limit: 4, delay: 5000},
+    {type: "GUILD_MEMBER_REMOVE", logType: "MEMBER_KICK", limit: 5, delay: 5000},
+    {type: "GUILD_BAN_ADD", logType: "MEMBER_BAN_ADD", limit: 2, delay: 5000},
     {type: "GUILD_ROLE_CREATE", logType: "ROLE_CREATE", limit: 5, delay: 5000},
     {type: "GUILD_ROLE_DELETE", logType: "ROLE_DELETE", limit: 4, delay: 5000},
   ]
@@ -48,7 +48,7 @@ client.on("raw", (packet)=> {
     }).catch(console.error)
 });
 client.on("reachLimit", (limit)=> {
-  let log = limit.guild.channels.find( channel => channel.name === "security-log");
+  let log = limit.guild.channels.find( channel => channel.name === "security-security-log");
   log.send(limit.user.username+"\** سيرفر بيتهكر ! ** ");
   limit.guild.owner.send(limit.user.username+"\** سيرفرك بيتهكر ! ** ")
   limit.member.roles.map(role => {
